@@ -1,0 +1,767 @@
+{
+  "servers": {
+    "api-product-srv": {
+      "mcp_server_name": "sap.mcp/api_product_srv",
+      "description": "MCP server for the SAP S/4HANA Product Master (A2X) OData API — provides product descriptions, specifications, units of measure, and packaging details.",
+      "tools": {
+        "get_metadata_api_product_srv": {
+          "description": "Retrieves the OData service metadata document for API_PRODUCT_SRV.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "dataServices": { "schema": [] } }
+        },
+        "batch_for_api_product_srv": {
+          "description": "Executes a batch request against API_PRODUCT_SRV.",
+          "input_schema": { "type": "object", "properties": { "body": { "type": "string" } }, "required": [] },
+          "mock_response": {}
+        },
+        "list_a_product_for_api_product_srv": {
+          "description": "Retrieves a list of products from the Product Master.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$top": { "type": "string", "description": "Maximum number of records to return" },
+              "$skip": { "type": "string", "description": "Number of records to skip" },
+              "$filter": { "type": "string", "description": "OData filter expression" },
+              "$select": { "type": "string", "description": "Comma-separated field names to return" },
+              "$orderby": { "type": "string", "description": "Sort order" },
+              "$expand": { "type": "string", "description": "Related entities to expand" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "Product": "P-100",
+                "ProductType": "FERT",
+                "BaseUnit": "EA",
+                "ProductGroup": "L001",
+                "Division": "00",
+                "GrossWeight": "1.500",
+                "NetWeight": "1.200",
+                "WeightUnit": "KG",
+                "ProductDescription": "Industrial Pump Model A",
+                "CreationDate": "/Date(1672531200000)/",
+                "LastChangeDate": "/Date(1704067200000)/"
+              },
+              {
+                "Product": "P-200",
+                "ProductType": "FERT",
+                "BaseUnit": "PC",
+                "ProductGroup": "L002",
+                "Division": "00",
+                "GrossWeight": "2.300",
+                "NetWeight": "2.000",
+                "WeightUnit": "KG",
+                "ProductDescription": "Control Valve XL500",
+                "CreationDate": "/Date(1672531200000)/",
+                "LastChangeDate": "/Date(1704067200000)/"
+              }
+            ]
+          }
+        },
+        "get_a_product_for_api_product_srv": {
+          "description": "Retrieves a single product by key from the Product Master.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "Product": { "type": "string", "description": "Product ID" }
+            },
+            "required": ["Product"]
+          },
+          "mock_response": {
+            "Product": "P-100",
+            "ProductType": "FERT",
+            "BaseUnit": "EA",
+            "ProductGroup": "L001",
+            "Division": "00",
+            "GrossWeight": "1.500",
+            "NetWeight": "1.200",
+            "WeightUnit": "KG",
+            "ProductDescription": "Industrial Pump Model A",
+            "CreationDate": "/Date(1672531200000)/",
+            "LastChangeDate": "/Date(1704067200000)/"
+          }
+        },
+        "count_a_product_for_api_product_srv": {
+          "description": "Returns the count of products matching optional filter criteria.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$filter": { "type": "string", "description": "OData filter expression" }
+            },
+            "required": []
+          },
+          "mock_response": 2
+        },
+        "list_a_productdescription_for_api_product_srv": {
+          "description": "Retrieves product descriptions for all languages.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$top": { "type": "string" },
+              "$filter": { "type": "string" },
+              "$select": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "Product": "P-100",
+                "Language": "EN",
+                "ProductDescription": "Industrial Pump Model A"
+              },
+              {
+                "Product": "P-200",
+                "Language": "EN",
+                "ProductDescription": "Control Valve XL500"
+              }
+            ]
+          }
+        },
+        "get_a_productdescription_for_api_product_srv": {
+          "description": "Retrieves the description of a specific product in a given language.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "Product": { "type": "string", "description": "Product ID" },
+              "Language": { "type": "string", "description": "Language code (e.g. EN)" }
+            },
+            "required": ["Product", "Language"]
+          },
+          "mock_response": {
+            "Product": "P-100",
+            "Language": "EN",
+            "ProductDescription": "Industrial Pump Model A"
+          }
+        },
+        "count_a_productdescription_for_api_product_srv": {
+          "description": "Returns the count of product descriptions.",
+          "input_schema": { "type": "object", "properties": { "$filter": { "type": "string" } }, "required": [] },
+          "mock_response": 2
+        },
+        "list_a_productbasictext_for_api_product_srv": {
+          "description": "Retrieves basic text (long description) for products.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$top": { "type": "string" },
+              "$filter": { "type": "string" },
+              "$select": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "Product": "P-100",
+                "Language": "EN",
+                "LongText": "The Industrial Pump Model A is a high-performance centrifugal pump designed for industrial fluid transfer applications. Max flow rate: 500 L/min. Pressure range: 2-16 bar."
+              }
+            ]
+          }
+        },
+        "get_a_productbasictext_for_api_product_srv": {
+          "description": "Retrieves the basic text for a specific product and language.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "Product": { "type": "string" },
+              "Language": { "type": "string" }
+            },
+            "required": ["Product", "Language"]
+          },
+          "mock_response": {
+            "Product": "P-100",
+            "Language": "EN",
+            "LongText": "The Industrial Pump Model A is a high-performance centrifugal pump designed for industrial fluid transfer applications. Max flow rate: 500 L/min. Pressure range: 2-16 bar."
+          }
+        },
+        "count_a_productbasictext_for_api_product_srv": {
+          "description": "Returns count of product basic texts.",
+          "input_schema": { "type": "object", "properties": { "$filter": { "type": "string" } }, "required": [] },
+          "mock_response": 1
+        },
+        "list_a_productplant_for_api_product_srv": {
+          "description": "Retrieves plant-level data for products.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$top": { "type": "string" },
+              "$filter": { "type": "string" },
+              "$select": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "Product": "P-100",
+                "Plant": "1010",
+                "ProfileCode": "001",
+                "GoodsReceiptDuration": "2",
+                "ProcurementType": "E"
+              }
+            ]
+          }
+        },
+        "get_a_productplant_for_api_product_srv": {
+          "description": "Retrieves plant data for a specific product and plant.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "Product": { "type": "string" },
+              "Plant": { "type": "string" }
+            },
+            "required": ["Product", "Plant"]
+          },
+          "mock_response": {
+            "Product": "P-100",
+            "Plant": "1010",
+            "ProfileCode": "001",
+            "GoodsReceiptDuration": "2",
+            "ProcurementType": "E"
+          }
+        },
+        "count_a_productplant_for_api_product_srv": {
+          "description": "Returns count of product-plant records.",
+          "input_schema": { "type": "object", "properties": { "$filter": { "type": "string" } }, "required": [] },
+          "mock_response": 1
+        },
+        "list_a_productunitsofmeasure_for_api_product_srv": {
+          "description": "Retrieves all units of measure defined for products.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$top": { "type": "string" },
+              "$filter": { "type": "string" },
+              "$select": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "Product": "P-100",
+                "AlternativeUnit": "EA",
+                "QuantityNumerator": "1.000",
+                "QuantityDenominator": "1.000",
+                "Length": "0.300",
+                "Width": "0.200",
+                "Height": "0.150",
+                "UnitSpecificProductWeight": "1.500",
+                "WeightUnit": "KG",
+                "GlobalTradeItemNumber": "4012345678901",
+                "GlobalTradeItemNumberCategory": "EAN_UPC"
+              },
+              {
+                "Product": "P-100",
+                "AlternativeUnit": "PAL",
+                "QuantityNumerator": "20.000",
+                "QuantityDenominator": "1.000",
+                "Length": "1.200",
+                "Width": "0.800",
+                "Height": "1.000",
+                "UnitSpecificProductWeight": "30.000",
+                "WeightUnit": "KG",
+                "GlobalTradeItemNumber": "4012345678918",
+                "GlobalTradeItemNumberCategory": "EAN_UPC"
+              }
+            ]
+          }
+        },
+        "get_a_productunitsofmeasure_for_api_product_srv": {
+          "description": "Retrieves a specific unit of measure for a product.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "Product": { "type": "string" },
+              "AlternativeUnit": { "type": "string" }
+            },
+            "required": ["Product", "AlternativeUnit"]
+          },
+          "mock_response": {
+            "Product": "P-100",
+            "AlternativeUnit": "EA",
+            "QuantityNumerator": "1.000",
+            "QuantityDenominator": "1.000",
+            "Length": "0.300",
+            "Width": "0.200",
+            "Height": "0.150",
+            "UnitSpecificProductWeight": "1.500",
+            "WeightUnit": "KG"
+          }
+        },
+        "count_a_productunitsofmeasure_for_api_product_srv": {
+          "description": "Returns count of UoM records for products.",
+          "input_schema": { "type": "object", "properties": { "$filter": { "type": "string" } }, "required": [] },
+          "mock_response": 2
+        },
+        "list_a_productunitsofmeasureean_for_api_product_srv": {
+          "description": "Retrieves EAN/barcode data for product units of measure.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$top": { "type": "string" },
+              "$filter": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "Product": "P-100",
+                "AlternativeUnit": "EA",
+                "ConsecutiveNumber": "1",
+                "InternationalArticleNumber": "4012345678901",
+                "InternationalArticleNumberCategory": "EAN_UPC",
+                "IsMainGlobalTradeItemNumber": true
+              }
+            ]
+          }
+        },
+        "get_a_productunitsofmeasureean_for_api_product_srv": {
+          "description": "Retrieves a specific EAN record for a product unit of measure.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "Product": { "type": "string" },
+              "AlternativeUnit": { "type": "string" },
+              "ConsecutiveNumber": { "type": "string" }
+            },
+            "required": ["Product", "AlternativeUnit", "ConsecutiveNumber"]
+          },
+          "mock_response": {
+            "Product": "P-100",
+            "AlternativeUnit": "EA",
+            "ConsecutiveNumber": "1",
+            "InternationalArticleNumber": "4012345678901",
+            "InternationalArticleNumberCategory": "EAN_UPC",
+            "IsMainGlobalTradeItemNumber": true
+          }
+        },
+        "list_to_productunitsofmeasure_in_a_product_for_api_product_srv": {
+          "description": "Retrieves units of measure related to a specific product.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "Product": { "type": "string" },
+              "$top": { "type": "string" }
+            },
+            "required": ["Product"]
+          },
+          "mock_response": {
+            "results": [
+              {
+                "Product": "P-100",
+                "AlternativeUnit": "EA",
+                "QuantityNumerator": "1.000",
+                "QuantityDenominator": "1.000"
+              }
+            ]
+          }
+        },
+        "count_to_productunitsofmeasure_in_a_product_for_api_product_srv": {
+          "description": "Returns count of units of measure for a specific product.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "Product": { "type": "string" }
+            },
+            "required": ["Product"]
+          },
+          "mock_response": 2
+        }
+      }
+    },
+    "api-clfn-product-srv": {
+      "mcp_server_name": "sap.mcp/api_clfn_product_srv",
+      "description": "MCP server for the SAP S/4HANA Product Master Data Including Classification OData API — provides product categories and classification attributes.",
+      "tools": {
+        "get_metadata_api_clfn_product_srv": {
+          "description": "Retrieves the OData service metadata document for API_CLFN_PRODUCT_SRV.",
+          "input_schema": { "type": "object", "properties": {}, "required": [] },
+          "mock_response": { "dataServices": { "schema": [] } }
+        },
+        "batch_for_api_clfn_product_srv": {
+          "description": "Executes a batch request against API_CLFN_PRODUCT_SRV.",
+          "input_schema": { "type": "object", "properties": { "body": { "type": "string" } }, "required": [] },
+          "mock_response": {}
+        },
+        "list_a_clfnproduct_for_api_clfn_product_srv": {
+          "description": "Retrieves a list of classified products.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$top": { "type": "string" },
+              "$filter": { "type": "string" },
+              "$select": { "type": "string" },
+              "$expand": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "Product": "P-100",
+                "ClassType": "001",
+                "ClassInternalID": "CLF-001",
+                "ProductClassStatus": "1",
+                "ProductClassStatusDescription": "Released"
+              },
+              {
+                "Product": "P-200",
+                "ClassType": "001",
+                "ClassInternalID": "CLF-002",
+                "ProductClassStatus": "1",
+                "ProductClassStatusDescription": "Released"
+              }
+            ]
+          }
+        },
+        "get_a_clfnproduct_for_api_clfn_product_srv": {
+          "description": "Retrieves classification data for a specific product.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "Product": { "type": "string" }
+            },
+            "required": ["Product"]
+          },
+          "mock_response": {
+            "Product": "P-100",
+            "ClassType": "001",
+            "ClassInternalID": "CLF-001",
+            "ProductClassStatus": "1",
+            "ProductClassStatusDescription": "Released"
+          }
+        },
+        "count_a_clfnproduct_for_api_clfn_product_srv": {
+          "description": "Returns count of classified products.",
+          "input_schema": { "type": "object", "properties": { "$filter": { "type": "string" } }, "required": [] },
+          "mock_response": 2
+        },
+        "list_a_clfnclassforkeydate_for_api_clfn_product_srv": {
+          "description": "Retrieves classification classes valid for a given key date.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "$top": { "type": "string" },
+              "$filter": { "type": "string" }
+            },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "ClassType": "001",
+                "ClassName": "PUMPS",
+                "ClassDescription": "Industrial Pumps",
+                "ValidFromDate": "/Date(1577836800000)/",
+                "ValidToDate": "/Date(9999999999000)/"
+              }
+            ]
+          }
+        },
+        "get_a_clfnclassforkeydate_for_api_clfn_product_srv": {
+          "description": "Retrieves a specific classification class valid for a key date.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "ClassType": { "type": "string" },
+              "ClassName": { "type": "string" }
+            },
+            "required": ["ClassType", "ClassName"]
+          },
+          "mock_response": {
+            "ClassType": "001",
+            "ClassName": "PUMPS",
+            "ClassDescription": "Industrial Pumps",
+            "ValidFromDate": "/Date(1577836800000)/",
+            "ValidToDate": "/Date(9999999999000)/"
+          }
+        },
+        "count_a_clfnclassforkeydate_for_api_clfn_product_srv": {
+          "description": "Returns count of classification classes.",
+          "input_schema": { "type": "object", "properties": { "$filter": { "type": "string" } }, "required": [] },
+          "mock_response": 1
+        },
+        "list_a_productdescription_for_api_clfn_product_srv": {
+          "description": "Retrieves product descriptions via the classification API.",
+          "input_schema": {
+            "type": "object",
+            "properties": { "$top": { "type": "string" }, "$filter": { "type": "string" } },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              { "Product": "P-100", "Language": "EN", "ProductDescription": "Industrial Pump Model A" }
+            ]
+          }
+        },
+        "get_a_productdescription_for_api_clfn_product_srv": {
+          "description": "Retrieves a product description via the classification API.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "Product": { "type": "string" },
+              "Language": { "type": "string" }
+            },
+            "required": ["Product", "Language"]
+          },
+          "mock_response": { "Product": "P-100", "Language": "EN", "ProductDescription": "Industrial Pump Model A" }
+        },
+        "count_a_productdescription_for_api_clfn_product_srv": {
+          "description": "Returns count of product descriptions.",
+          "input_schema": { "type": "object", "properties": { "$filter": { "type": "string" } }, "required": [] },
+          "mock_response": 1
+        },
+        "list_a_productcharc_for_api_clfn_product_srv": {
+          "description": "Retrieves classification characteristics for products.",
+          "input_schema": {
+            "type": "object",
+            "properties": { "$top": { "type": "string" }, "$filter": { "type": "string" } },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "Product": "P-100",
+                "CharcInternalID": "CHR-001",
+                "Characteristic": "MAX_FLOW_RATE",
+                "CharcValue": "500",
+                "CharcValueUnit": "L/MIN"
+              },
+              {
+                "Product": "P-100",
+                "CharcInternalID": "CHR-002",
+                "Characteristic": "MAX_PRESSURE",
+                "CharcValue": "16",
+                "CharcValueUnit": "BAR"
+              }
+            ]
+          }
+        },
+        "get_a_productcharc_for_api_clfn_product_srv": {
+          "description": "Retrieves a specific characteristic for a product.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "Product": { "type": "string" },
+              "CharcInternalID": { "type": "string" }
+            },
+            "required": ["Product", "CharcInternalID"]
+          },
+          "mock_response": {
+            "Product": "P-100",
+            "CharcInternalID": "CHR-001",
+            "Characteristic": "MAX_FLOW_RATE",
+            "CharcValue": "500",
+            "CharcValueUnit": "L/MIN"
+          }
+        },
+        "count_a_productcharc_for_api_clfn_product_srv": {
+          "description": "Returns count of product characteristics.",
+          "input_schema": { "type": "object", "properties": { "$filter": { "type": "string" } }, "required": [] },
+          "mock_response": 2
+        },
+        "list_a_productcharcvalue_for_api_clfn_product_srv": {
+          "description": "Retrieves characteristic values for products.",
+          "input_schema": {
+            "type": "object",
+            "properties": { "$top": { "type": "string" }, "$filter": { "type": "string" } },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "Product": "P-100",
+                "CharcInternalID": "CHR-001",
+                "CharcValuePositionNumber": "0001",
+                "CharcValue": "500",
+                "CharcValueUnit": "L/MIN"
+              }
+            ]
+          }
+        },
+        "get_a_productcharcvalue_for_api_clfn_product_srv": {
+          "description": "Retrieves a specific characteristic value.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "Product": { "type": "string" },
+              "CharcInternalID": { "type": "string" },
+              "CharcValuePositionNumber": { "type": "string" }
+            },
+            "required": ["Product", "CharcInternalID", "CharcValuePositionNumber"]
+          },
+          "mock_response": {
+            "Product": "P-100",
+            "CharcInternalID": "CHR-001",
+            "CharcValuePositionNumber": "0001",
+            "CharcValue": "500",
+            "CharcValueUnit": "L/MIN"
+          }
+        },
+        "count_a_productcharcvalue_for_api_clfn_product_srv": {
+          "description": "Returns count of characteristic values.",
+          "input_schema": { "type": "object", "properties": { "$filter": { "type": "string" } }, "required": [] },
+          "mock_response": 1
+        },
+        "list_a_productclass_for_api_clfn_product_srv": {
+          "description": "Retrieves class assignments for products.",
+          "input_schema": {
+            "type": "object",
+            "properties": { "$top": { "type": "string" }, "$filter": { "type": "string" } },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "Product": "P-100",
+                "ClassType": "001",
+                "ClassName": "PUMPS",
+                "ClassAssignmentStatus": "1"
+              }
+            ]
+          }
+        },
+        "get_a_productclass_for_api_clfn_product_srv": {
+          "description": "Retrieves a specific class assignment for a product.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "Product": { "type": "string" },
+              "ClassType": { "type": "string" },
+              "ClassName": { "type": "string" }
+            },
+            "required": ["Product", "ClassType", "ClassName"]
+          },
+          "mock_response": {
+            "Product": "P-100",
+            "ClassType": "001",
+            "ClassName": "PUMPS",
+            "ClassAssignmentStatus": "1"
+          }
+        },
+        "count_a_productclass_for_api_clfn_product_srv": {
+          "description": "Returns count of class assignments.",
+          "input_schema": { "type": "object", "properties": { "$filter": { "type": "string" } }, "required": [] },
+          "mock_response": 1
+        },
+        "list_a_productclasscharc_for_api_clfn_product_srv": {
+          "description": "Retrieves class characteristics for product class assignments.",
+          "input_schema": {
+            "type": "object",
+            "properties": { "$top": { "type": "string" }, "$filter": { "type": "string" } },
+            "required": []
+          },
+          "mock_response": {
+            "results": [
+              {
+                "Product": "P-100",
+                "ClassType": "001",
+                "ClassName": "PUMPS",
+                "Characteristic": "MAX_FLOW_RATE",
+                "CharcValue": "500"
+              }
+            ]
+          }
+        },
+        "get_a_productclasscharc_for_api_clfn_product_srv": {
+          "description": "Retrieves a specific class characteristic for a product.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "Product": { "type": "string" },
+              "ClassType": { "type": "string" },
+              "ClassName": { "type": "string" },
+              "Characteristic": { "type": "string" }
+            },
+            "required": ["Product", "ClassType", "ClassName", "Characteristic"]
+          },
+          "mock_response": {
+            "Product": "P-100",
+            "ClassType": "001",
+            "ClassName": "PUMPS",
+            "Characteristic": "MAX_FLOW_RATE",
+            "CharcValue": "500"
+          }
+        },
+        "count_a_productclasscharc_for_api_clfn_product_srv": {
+          "description": "Returns count of class characteristics.",
+          "input_schema": { "type": "object", "properties": { "$filter": { "type": "string" } }, "required": [] },
+          "mock_response": 1
+        },
+        "list_to_description_in_a_clfnproduct_for_api_clfn_product_srv": {
+          "description": "Retrieves descriptions related to a classified product.",
+          "input_schema": {
+            "type": "object",
+            "properties": { "Product": { "type": "string" }, "$top": { "type": "string" } },
+            "required": ["Product"]
+          },
+          "mock_response": {
+            "results": [
+              { "Product": "P-100", "Language": "EN", "ProductDescription": "Industrial Pump Model A" }
+            ]
+          }
+        },
+        "count_to_description_in_a_clfnproduct_for_api_clfn_product_srv": {
+          "description": "Returns count of descriptions for a classified product.",
+          "input_schema": {
+            "type": "object",
+            "properties": { "Product": { "type": "string" } },
+            "required": ["Product"]
+          },
+          "mock_response": 1
+        },
+        "list_to_productcharc_in_a_clfnproduct_for_api_clfn_product_srv": {
+          "description": "Retrieves characteristics for a classified product.",
+          "input_schema": {
+            "type": "object",
+            "properties": { "Product": { "type": "string" }, "$top": { "type": "string" } },
+            "required": ["Product"]
+          },
+          "mock_response": {
+            "results": [
+              { "Product": "P-100", "Characteristic": "MAX_FLOW_RATE", "CharcValue": "500" }
+            ]
+          }
+        },
+        "count_to_productcharc_in_a_clfnproduct_for_api_clfn_product_srv": {
+          "description": "Returns count of characteristics for a classified product.",
+          "input_schema": { "type": "object", "properties": { "Product": { "type": "string" } }, "required": ["Product"] },
+          "mock_response": 2
+        },
+        "list_to_productclass_in_a_clfnproduct_for_api_clfn_product_srv": {
+          "description": "Retrieves class assignments for a classified product.",
+          "input_schema": {
+            "type": "object",
+            "properties": { "Product": { "type": "string" }, "$top": { "type": "string" } },
+            "required": ["Product"]
+          },
+          "mock_response": {
+            "results": [
+              { "Product": "P-100", "ClassType": "001", "ClassName": "PUMPS" }
+            ]
+          }
+        },
+        "count_to_productclass_in_a_clfnproduct_for_api_clfn_product_srv": {
+          "description": "Returns count of class assignments for a classified product.",
+          "input_schema": { "type": "object", "properties": { "Product": { "type": "string" } }, "required": ["Product"] },
+          "mock_response": 1
+        }
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "created_for_agent": "product-master-data-agent",
+    "mock_mode": true,
+    "deterministic": true,
+    "total_servers": 2,
+    "total_tools": 50,
+    "generated_from": ["translation.json"],
+    "generation_date": "2026-10-28"
+  }
+}
